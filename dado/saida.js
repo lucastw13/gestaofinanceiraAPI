@@ -13,17 +13,22 @@ const SchemaSaida = new Schema({
     valor: {
         type: Number
     },
-
     competencia: {
         type: [{
-            mes:{
-                type:Number
+            mes: {
+                type: Number
             },
-            ano:{
-                type:Number
+            ano: {
+                type: Number
             },
             valor: {
                 type: Number
+            },
+            paguei: {
+                type: Boolean
+            },
+            confirmei: {
+                type: Boolean
             },
         }]
     },

@@ -1,18 +1,12 @@
 const Dado = require('../dado/entrada');
 class entrada {
-  static async get(_id,pResidencia, pRecorrente) {
+  static async get(_id, pResidencia) {
     var jsonRetorno = { status: 500, json: {} };
     try {
       if (_id == "" || _id == undefined) {
         var lista = []
-        if (pRecorrente == "" || pRecorrente == undefined){
-          pRecorrente = false
-        }
-        if (pRecorrente){
-          lista = await Dado.find({residencia:pResidencia,recorrente:pRecorrente})
-        } else {
-          lista = await Dado.find({residencia:pResidencia})
-        }
+
+        lista = await Dado.find({ residencia: pResidencia })
         jsonRetorno.status = 200
         jsonRetorno.json = { status: true, descricao: "busca realizada com sucesso!", lista: lista }
       } else {
