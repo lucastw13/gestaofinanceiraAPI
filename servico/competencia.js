@@ -1,4 +1,3 @@
-const Dado = require('../dado/competencia');
 const DadoEntrada = require('../dado/entrada');
 const DadoSaida = require('../dado/saida');
 
