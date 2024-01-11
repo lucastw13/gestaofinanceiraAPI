@@ -15,12 +15,14 @@ class competencia {
       var listaMozaoRecorrente = []
       var totalSaidaRecorrente = 0
       var listaSaidaRecorrenteTemp = []
+      var totalSomenteRecorrente = 0
       for (var itemSaidaRecorrente of listaSaidaRecorrente) {
         totalSaidaRecorrente += itemSaidaRecorrente.valor
         if (itemSaidaRecorrente.mozao) {
           totalMozaoRecorrente += itemSaidaRecorrente.valor
           listaMozaoRecorrente.push(itemSaidaRecorrente)
         } else {
+          totalSomenteRecorrente +=  itemSaidaRecorrente.valor
           listaSaidaRecorrenteTemp.push(itemSaidaRecorrente)
         }
       }
@@ -57,7 +59,8 @@ class competencia {
         var item = {}
         item.totalEntrada = 0
         item.totalSaida = totalSaidaRecorrente
-
+        item.totalSomenteRecorrente = totalSomenteRecorrente
+        item.totalSomenteNaoRecorrente = 0
         item.entrada = []
         item.saida = []
         item.saidaRecorrente = listaSaidaRecorrenteTemp
@@ -83,6 +86,7 @@ class competencia {
                   item.totalMozao += itemCompetencia.valor
                   item.mozao.push({ _id: itemSaida._id, descricao: itemSaida.descricao, valor: itemCompetencia.valor, paguei: itemCompetencia.paguei, confirmei: itemCompetencia.confirmei })
                 } else {
+                  item.totalSomenteNaoRecorrente += itemCompetencia.valor
                   item.saida.push({ _id: itemSaida._id, descricao: itemSaida.descricao, valor: itemCompetencia.valor, paguei: itemCompetencia.paguei, confirmei: itemCompetencia.confirmei })
                 }
               }
@@ -90,10 +94,13 @@ class competencia {
           }
         }
         item.saldo = item.totalEntrada - item.totalSaida
-        item.totalEntrada = "R$" + item.totalEntrada.toFixed(2);
+        item.totalEntrada = "R$" + item.totalEntrada;
         item.totalSaida = "R$" + item.totalSaida.toFixed(2);
         item.saldo = "R$" + item.saldo.toFixed(2);
         item.totalMozao = "R$" + item.totalMozao.toFixed(2);
+        item.totalSomenteNaoRecorrente = "R$" + item.totalSomenteNaoRecorrente.toFixed(2);
+        item.totalSomenteRecorrente = "R$" + item.totalSomenteRecorrente.toFixed(2);
+
         lista.push(item)
         mes++
       }
