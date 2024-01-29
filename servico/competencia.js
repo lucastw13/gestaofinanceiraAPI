@@ -7,7 +7,7 @@ class competencia {
     try {
       var lista = []
       var data = new Date()
-      var dia = data.getDay()
+      var dia = data.getDate()
       var mes = data.getMonth() + 1
       if(dia>=10){
         mes++;
