@@ -15,6 +15,7 @@ class competencia {
       var ano = data.getFullYear()
       var listaEntradaRecorrente = JSON.parse(JSON.stringify(await DadoEntrada.find({ residencia: residencia, recorrente: true })))
       var listaSaidaRecorrente = JSON.parse(JSON.stringify(await DadoSaida.find({ residencia: residencia, recorrente: true })))
+      var listaSaida = JSON.parse(JSON.stringify(await DadoSaida.find({ residencia: residencia, recorrente: false })))
       var totalMozaoRecorrente = 0
       var listaMozaoRecorrente = []
       var totalSaidaRecorrente = 0
@@ -76,7 +77,6 @@ class competencia {
           item.totalEntrada += itemEntrada.valor
           item.entrada.push(itemEntrada)
         }
-        var listaSaida = JSON.parse(JSON.stringify(await DadoSaida.find({ residencia: residencia, recorrente: false ,"competencia.mes":mes,"competencia.ano":ano})))
         item.saida = []
         item.mozao = []
         item.totalMozao = totalMozaoRecorrente
