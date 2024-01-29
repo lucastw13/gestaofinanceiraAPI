@@ -7,7 +7,11 @@ class competencia {
     try {
       var lista = []
       var data = new Date()
+      var dia = data.getDay()
       var mes = data.getMonth() + 1
+      if(dia>=10){
+        mes++;
+      }
       var ano = data.getFullYear()
       var listaEntradaRecorrente = JSON.parse(JSON.stringify(await DadoEntrada.find({ residencia: residencia, recorrente: true })))
       var listaSaidaRecorrente = JSON.parse(JSON.stringify(await DadoSaida.find({ residencia: residencia, recorrente: true })))
