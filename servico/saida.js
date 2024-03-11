@@ -9,10 +9,11 @@ class saida {
         var listaTemp = []
         var data = new Date()
         var mesAtual = data.getMonth() + 1
+        var anoAtual = data.getFullYear()
         for(var item of lista){
           var valorRestante = 0
           for(var itemCompetencia of item.competencia){
-            if (itemCompetencia.mes>mesAtual){
+            if ((itemCompetencia.mes>mesAtual)||(itemCompetencia.ano>anoAtual)){
               valorRestante = valorRestante + itemCompetencia.valor
             }
           }
