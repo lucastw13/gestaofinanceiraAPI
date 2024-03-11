@@ -16,7 +16,7 @@ class saida {
               valorRestante = valorRestante + itemCompetencia.valor
             }
           }
-          item.valor = valorRestante
+          item.valor = valorRestante.toFixed(2);
           listaTemp.push(item)
         }
         jsonRetorno.status = 200
