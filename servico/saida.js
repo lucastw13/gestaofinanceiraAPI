@@ -5,7 +5,20 @@ class saida {
     try {
       if (_id == "" || _id == undefined) {
         var listaRecorrente = await Dado.find({ residencia: pResidencia, recorrente: true })
-        var lista = await Dado.find({ residencia: pResidencia, recorrente: false })
+        var lista = JSON.parse(JSON.stringify(await Dado.find({ residencia: pResidencia, recorrente: false })))
+        var listaTemp = []
+        var data = new Date()
+        var mesAtual = data.getMonth() + 1
+        for(var item of lista){
+          var valorRestante = 0
+          for(var itemCompetencia of item.competencia){
+            if (itemCompetencia.mes>mesAtual){
+              valorRestante = valorRestante + itemCompetencia.valor
+            }
+          }
+          item.valor = valorRestante
+          listaTemp.push(item)
+        }
         jsonRetorno.status = 200
         jsonRetorno.json = { status: true, descricao: "busca realizada com sucesso!", lista: lista, listaRecorrente: listaRecorrente }
       } else {
