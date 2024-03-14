@@ -38,7 +38,7 @@ class saida {
           var anoAtual = data.getFullYear()
           var listaCompetenciaTemp = []
           for (var itemCompetenciaTemp of item.competencia) {
-            if ((itemCompetenciaTemp.mes >= mesAtual) && (itemCompetenciaTemp.ano >= anoAtual)) {
+            if ((itemCompetenciaTemp.mes >= mesAtual) || (itemCompetenciaTemp.ano > anoAtual)) {
               listaCompetenciaTemp.push(itemCompetenciaTemp)
             }
           }
