@@ -10,10 +10,10 @@ class saida {
         var data = new Date()
         var mesAtual = data.getMonth() + 1
         var anoAtual = data.getFullYear()
-        for(var item of lista){
+        for (var item of lista) {
           var valorRestante = 0
-          for(var itemCompetencia of item.competencia){
-            if ((itemCompetencia.mes>mesAtual)||(itemCompetencia.ano>anoAtual)){
+          for (var itemCompetencia of item.competencia) {
+            if ((itemCompetencia.mes > mesAtual) || (itemCompetencia.ano > anoAtual)) {
               valorRestante = valorRestante + itemCompetencia.valor
             }
           }
@@ -23,11 +23,26 @@ class saida {
         jsonRetorno.status = 200
         jsonRetorno.json = { status: true, descricao: "busca realizada com sucesso!", lista: lista, listaRecorrente: listaRecorrente }
       } else {
-        const item = await Dado.findById(_id)
+        var item = JSON.parse(JSON.stringify(await Dado.findById(_id)))
         if (item == "" || item == undefined) {
           jsonRetorno.status = 200
           jsonRetorno.json = { status: false, descricao: "saida não encontrado!" }
         } else {
+          var data = new Date()
+          var mesAtual = data.getMonth() + 1
+          var diaAtual = data.getDate()
+          if (diaAtual >= 10) {
+            mesAtual++;
+          }
+
+          var anoAtual = data.getFullYear()
+          var listaCompetenciaTemp = []
+          for (var itemCompetenciaTemp of item.competencia) {
+            if ((itemCompetenciaTemp.mes >= mesAtual) && (itemCompetenciaTemp.ano >= anoAtual)) {
+              listaCompetenciaTemp.push(itemCompetenciaTemp)
+            }
+          }
+          item.competencia = listaCompetenciaTemp
           jsonRetorno.status = 200
           jsonRetorno.json = { status: true, descricao: "busca realizada com sucesso!", item: item }
 
