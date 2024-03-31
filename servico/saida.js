@@ -143,10 +143,6 @@ class saida {
     var jsonRetorno = { status: 500, json: {} };
     var item = body
     try {
-      if(!item.recorrente){
-        item.mes = ""
-        item.ano = ""
-      }
       var itemCriado = await Dado.create(item);
       jsonRetorno.status = 201
       jsonRetorno.json = { status: true, descricao: "saida criado com sucesso!", item: itemCriado }
