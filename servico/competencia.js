@@ -9,7 +9,7 @@ class competencia {
       var data = new Date()
       var dia = data.getDate()
       var mes = data.getMonth() + 1
-      if(dia>=10){
+      if (dia >= 10) {
         mes++;
       }
       var ano = data.getFullYear()
@@ -22,13 +22,15 @@ class competencia {
       var listaSaidaRecorrenteTemp = []
       var totalSomenteRecorrente = 0
       for (var itemSaidaRecorrente of listaSaidaRecorrente) {
-        totalSaidaRecorrente += itemSaidaRecorrente.valor
-        if (itemSaidaRecorrente.mozao) {
-          totalMozaoRecorrente += itemSaidaRecorrente.valor
-          listaMozaoRecorrente.push(itemSaidaRecorrente)
-        } else {
-          totalSomenteRecorrente +=  itemSaidaRecorrente.valor
-          listaSaidaRecorrenteTemp.push(itemSaidaRecorrente)
+        if (itemSaidaRecorrente.valor > 0) {
+          totalSaidaRecorrente += itemSaidaRecorrente.valor
+          if (itemSaidaRecorrente.mozao) {
+            totalMozaoRecorrente += itemSaidaRecorrente.valor
+            listaMozaoRecorrente.push(itemSaidaRecorrente)
+          } else {
+            totalSomenteRecorrente += itemSaidaRecorrente.valor
+            listaSaidaRecorrenteTemp.push(itemSaidaRecorrente)
+          }
         }
       }
       listaSaidaRecorrente = listaSaidaRecorrenteTemp
@@ -40,10 +42,12 @@ class competencia {
 
         var listaSaidaRecorrenteTemp = []
         for (var itemSaidaRecorrenteTemp of listaSaidaRecorrente) {
-          var itemNovoSaidaRecorrente = {_id:itemSaidaRecorrenteTemp._id,
-            descricao:itemSaidaRecorrenteTemp.descricao,
-            valor:itemSaidaRecorrenteTemp.valor,
-            competencia:itemSaidaRecorrenteTemp.competencia}
+          var itemNovoSaidaRecorrente = {
+            _id: itemSaidaRecorrenteTemp._id,
+            descricao: itemSaidaRecorrenteTemp.descricao,
+            valor: itemSaidaRecorrenteTemp.valor,
+            competencia: itemSaidaRecorrenteTemp.competencia
+          }
 
           var achou = false
           if (!achou) {
@@ -74,8 +78,10 @@ class competencia {
         var listaEntrada = JSON.parse(JSON.stringify(await DadoEntrada.find({ residencia: residencia, mes: mes, ano: ano, recorrente: false })))
         listaEntrada = listaEntrada.concat(listaEntradaRecorrente)
         for (var itemEntrada of listaEntrada) {
-          item.totalEntrada += itemEntrada.valor
-          item.entrada.push(itemEntrada)
+          if (itemEntrada.valor > 0) {
+            item.totalEntrada += itemEntrada.valor
+            item.entrada.push(itemEntrada)
+          }
         }
         item.saida = []
         item.mozao = []
@@ -84,14 +90,16 @@ class competencia {
         for (var itemSaida of listaSaida) {
           if ((itemSaida.competencia != "") && (itemSaida.competencia != undefined)) {
             for (var itemCompetencia of itemSaida.competencia) {
-              if ((itemCompetencia.mes == mes) && (itemCompetencia.ano == ano)) {
-                item.totalSaida += itemCompetencia.valor
-                if (itemSaida.mozao) {
-                  item.totalMozao += itemCompetencia.valor
-                  item.mozao.push({ _id: itemSaida._id, descricao: itemSaida.descricao, valor: itemCompetencia.valor, paguei: itemCompetencia.paguei, confirmei: itemCompetencia.confirmei })
-                } else {
-                  item.totalSomenteNaoRecorrente += itemCompetencia.valor
-                  item.saida.push({ _id: itemSaida._id, descricao: itemSaida.descricao, valor: itemCompetencia.valor, paguei: itemCompetencia.paguei, confirmei: itemCompetencia.confirmei })
+              if (itemCompetencia.valor > 0) {
+                if ((itemCompetencia.mes == mes) && (itemCompetencia.ano == ano)) {
+                  item.totalSaida += itemCompetencia.valor
+                  if (itemSaida.mozao) {
+                    item.totalMozao += itemCompetencia.valor
+                    item.mozao.push({ _id: itemSaida._id, descricao: itemSaida.descricao, valor: itemCompetencia.valor, paguei: itemCompetencia.paguei, confirmei: itemCompetencia.confirmei })
+                  } else {
+                    item.totalSomenteNaoRecorrente += itemCompetencia.valor
+                    item.saida.push({ _id: itemSaida._id, descricao: itemSaida.descricao, valor: itemCompetencia.valor, paguei: itemCompetencia.paguei, confirmei: itemCompetencia.confirmei })
+                  }
                 }
               }
             }
