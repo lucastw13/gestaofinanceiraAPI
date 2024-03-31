@@ -13,6 +13,12 @@ const SchemaSaida = new Schema({
     valor: {
         type: Number
     },
+    mes: {
+        type: Number
+    },
+    ano: {
+        type: Number
+    },
     competencia: {
         type: [{
             mes: {
