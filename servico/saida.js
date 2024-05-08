@@ -28,10 +28,11 @@ class saida {
           jsonRetorno.status = 200
           jsonRetorno.json = { status: false, descricao: "saida não encontrado!" }
         } else {
+          const diaCorte = 8
           var data = new Date()
           var mesAtual = data.getMonth() + 1
           var diaAtual = data.getDate()
-          if (diaAtual >= 10) {
+          if (diaAtual >= diaCorte) {
             mesAtual++;
           }
 
