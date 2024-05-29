@@ -6,11 +6,11 @@ class entrada {
       if (_id == "" || _id == undefined) {
         var lista = []
 
-        lista = await JSON.parse(JSON.stringify(Dado.find({ residencia: pResidencia })))
+        lista = JSON.parse(JSON.stringify(await Dado.find({ residencia: pResidencia })))
         var listaTemp = []
         for (var item of lista) {
           if (item.recorrente) {
-            item.periodo = item.recorrente
+            item.periodo = "Recorrente"
           } else {
             item.periodo = item.mes+"/"+item.ano
           }
