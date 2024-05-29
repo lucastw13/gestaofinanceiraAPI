@@ -7,6 +7,9 @@ class entrada {
         var lista = []
 
         lista = JSON.parse(JSON.stringify(await Dado.find({ residencia: pResidencia })))
+        lista = lista.sort((item1, item2) => item1.mes - item2.mes)
+        lista = lista.sort((item1, item2) => item1.ano - item2.ano)
+
         var listaTemp = []
         for (var item of lista) {
           if (item.recorrente) {
