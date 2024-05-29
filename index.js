@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require('mongoose');
 const Entrada = require('./servico/entrada');
 const Saida = require('./servico/saida');
+const Acao = require('./servico/acao');
 const Competencia = require('./servico/competencia');
 const Residencia = require('./servico/residencia');
 const Usuario = require('./servico/usuario');
@@ -26,6 +27,7 @@ app.put('/:entidade', async (req, res) => {
     var jsonRetorno = { status: 500, json: {} };
     switch (req.params.entidade) {
         case "saida": jsonRetorno = await Saida.put(req.body); break;
+        case "acao": jsonRetorno = await Acao.put(req.body); break;
         case "entrada": jsonRetorno = await Entrada.put(req.body); break;
         //case "competencia" : jsonRetorno = await Competencia.put(req.body); break;
     }
@@ -46,6 +48,7 @@ app.get('/:entidade/:codigo', async (req, res) => {
         //case "competencia" : jsonRetorno = await Competencia.get(req.params.codigo); break;
         case "residencia": jsonRetorno = await Residencia.get(req.params.codigo); break;
         case "usuario": jsonRetorno = await Usuario.get(req.params.codigo); break;
+        case "acao": jsonRetorno = await Acao.get(req.params.codigo); break;
     }
     res.status(jsonRetorno.status).json(jsonRetorno.json)
 })
@@ -56,6 +59,7 @@ app.get('/:entidade/:codigo/:residencia', async (req, res) => {
         case "saida": jsonRetorno = await Saida.get("", req.params.residencia); break;
         case "entrada": jsonRetorno = await Entrada.get("", req.params.residencia); break;
         case "competencia": jsonRetorno = await Competencia.get(req.params.residencia); break;
+        case "acao": jsonRetorno = await Acao.get("", req.params.residencia); break;
     }
     res.status(jsonRetorno.status).json(jsonRetorno.json)
 })
@@ -86,6 +90,7 @@ app.delete('/:entidade/:codigo', async (req, res) => {
         case "entrada": jsonRetorno = await Entrada.delete(req.params.codigo); break;
         //case "competencia" : jsonRetorno = await Competencia.delete(req.params.codigo); break;
         case "residencia": jsonRetorno = await Residencia.delete(req.params.codigo); break;
+        case "acao": jsonRetorno = await Acao.delete(req.params.codigo); break;
     }
     res.status(jsonRetorno.status).json(jsonRetorno.json)
 })
@@ -98,6 +103,7 @@ app.post('/:entidade', async (req, res) => {
         //case "competencia" : jsonRetorno = await Competencia.post(req.body); break;
         case "residencia": jsonRetorno = await Residencia.post(req.body); break;
         case "usuario": jsonRetorno = await Usuario.post(req.body); break;
+        case "acao": jsonRetorno = await Acao.post(req.body); break;
     }
     res.status(jsonRetorno.status).json(jsonRetorno.json)
 })

@@ -6,7 +6,14 @@ class entrada {
       if (_id == "" || _id == undefined) {
         var lista = []
 
-        lista = await Dado.find({ residencia: pResidencia })
+        lista = await JSON.parse(JSON.stringify(Dado.find({ residencia: pResidencia })))
+        for (var itemTemp in lista) {
+          if (itemTemp.recorrente) {
+            itemTemp.periodo = itemTemp.recorrente
+          } else {
+            itemTemp.periodo = itemTemp.mes+"/"+itemTemp.ano
+          }
+        }
         jsonRetorno.status = 200
         jsonRetorno.json = { status: true, descricao: "busca realizada com sucesso!", lista: lista }
       } else {
