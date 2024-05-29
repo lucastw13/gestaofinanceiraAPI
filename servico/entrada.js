@@ -7,13 +7,16 @@ class entrada {
         var lista = []
 
         lista = await JSON.parse(JSON.stringify(Dado.find({ residencia: pResidencia })))
-        for (var itemTemp in lista) {
-          if (itemTemp.recorrente) {
-            itemTemp.periodo = itemTemp.recorrente
+        var listaTemp = []
+        for (var item of lista) {
+          if (item.recorrente) {
+            item.periodo = item.recorrente
           } else {
-            itemTemp.periodo = itemTemp.mes+"/"+itemTemp.ano
+            item.periodo = item.mes+"/"+item.ano
           }
+          listaTemp.push(item)
         }
+        lista = listaTemp
         jsonRetorno.status = 200
         jsonRetorno.json = { status: true, descricao: "busca realizada com sucesso!", lista: lista }
       } else {
