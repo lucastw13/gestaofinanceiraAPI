@@ -13,7 +13,7 @@ class saida {
         for (var item of lista) {
           var valorRestante = 0
           for (var itemCompetencia of item.competencia) {
-            if ((itemCompetencia.mes > mesAtual) || (itemCompetencia.ano > anoAtual)) {
+            if (((itemCompetencia.mes > mesAtual) && (itemCompetencia.ano == anoAtual))||(itemCompetencia.ano > anoAtual)) {
               valorRestante = valorRestante + itemCompetencia.valor
             }
           }
@@ -39,7 +39,7 @@ class saida {
           var anoAtual = data.getFullYear()
           var listaCompetenciaTemp = []
           for (var itemCompetenciaTemp of item.competencia) {
-            if ((itemCompetenciaTemp.mes >= mesAtual) || (itemCompetenciaTemp.ano > anoAtual)) {
+            if (((itemCompetenciaTemp.mes >= mesAtual)&&(itemCompetenciaTemp.ano == anoAtual)) || (itemCompetenciaTemp.ano > anoAtual)) {
               listaCompetenciaTemp.push(itemCompetenciaTemp)
             }
           }
