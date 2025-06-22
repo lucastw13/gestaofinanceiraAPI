@@ -23,7 +23,7 @@ class competencia {
       var listaSaidaRecorrenteTemp = []
       var totalSomenteRecorrente = 0
       for (var itemSaidaRecorrente of listaSaidaRecorrente) {
-        if (itemSaidaRecorrente.valor > 0) {
+        if (itemSaidaRecorrente.valor != 0) {
           totalSaidaRecorrente += itemSaidaRecorrente.valor
           if (itemSaidaRecorrente.mozao) {
             totalMozaoRecorrente += itemSaidaRecorrente.valor
