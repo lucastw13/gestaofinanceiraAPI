@@ -91,7 +91,7 @@ class competencia {
         for (var itemSaida of listaSaida) {
           if ((itemSaida.competencia != "") && (itemSaida.competencia != undefined)) {
             for (var itemCompetencia of itemSaida.competencia) {
-              if (itemCompetencia.valor > 0) {
+              if (itemCompetencia.valor != 0) {
                 if ((itemCompetencia.mes == mes) && (itemCompetencia.ano == ano)) {
                   item.totalSaida += itemCompetencia.valor
                   if (itemSaida.mozao) {
