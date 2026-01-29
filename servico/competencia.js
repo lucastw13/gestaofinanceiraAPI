@@ -3,7 +3,7 @@ const DadoSaida = require('../dado/saida');
 
 class competencia {
   static async get(residencia) {
-    const diaCorte = 8
+    const diaCorte = 11
     var jsonRetorno = { status: 500, json: {} };
     try {
       var lista = []
